@@ -1,0 +1,23 @@
+{
+  "param":
+  {
+    "BankNodes::network.fc1.weight":[[8,6]],
+    "BankNodes::network.fc1.bias":[[8,7]],
+    "BankNodes::network.fc2.weight":[[8,6]],
+    "BankNodes::network.fc2.bias":[[8,8]]
+  },
+  "output":
+  {
+    "BankNodes::nndct_input_0":[[8,6]],
+    "BankNodes::nndct_relu_2":[[8,6]],
+    "BankNodes::nndct_dense_3":[[8,9]]
+  },
+  "input":
+  {
+
+  },
+  "fast_finetuned":false,
+  "bias_corrected":true,
+  "version":"3.5.0+60df3f1+torch1.13.1+cu117",
+  "graph_md5":"282ed5fbd30aa9eb21b1a4460f51397b"
+}

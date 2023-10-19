@@ -1,0 +1,5 @@
+[1, 4]: BankNodes::input_0
+[1, 8]: BankNodes::BankNodes/Sequential[network]/Linear[fc1]/ret.3
+[1, 8]: BankNodes::BankNodes/Sequential[network]/ReLU[relu1]/ret.5
+[1, 1]: BankNodes::BankNodes/Sequential[network]/Linear[fc2]/ret.7
+[1, 1]: BankNodes::BankNodes/Sequential[network]/Sigmoid[sig2]/ret
