@@ -50,19 +50,14 @@ def main(argv):
     print("Input Tensor print: ", inputTensor)
     print("Output Tensor print: ", outputTensor)
     
-    input_dim = tuple(inputTensor[1].get_tensor().dims)
-    batch = input_ndim[0]
-    width = input_ndim[1]
-    height = input_ndim[2]
+    print(dir(inputTensors[0])
     
-    print("Input Tensor Tuple: ", input_dim)
-    print("Batch: ", batch)
-    print("Width: ", width)
-    print("Height: ", height)
+    for inputTensor in inputTensors:
+        print('Input tensor :',inputTensor.name, inputTensors.dims)
     
+    shapeOut = tuple(outputTensors[0].dims)
     
-    
-    
+    print("Shapeout: ", shapeOut)
     
     # Measure time 
     time_start = time.time()
