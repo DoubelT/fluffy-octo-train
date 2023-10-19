@@ -90,7 +90,7 @@ def main(argv):
     subgraphs = get_child_subgraph_dpu(g) # Extract DPU subgraphs from the graph
     assert len(subgraphs) == 1  # only one DPU kernel
 
-    """Creates DPU runner, associated with the DPU subgraph."""
+    #Creates DPU runner, associated with the DPU subgraph.
     dpu_runners = vart.Runner.create_runner(subgraphs[0], "run")
     print("DPU Runner Created")
 
@@ -129,6 +129,6 @@ def main(argv):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("usage : python3 dpu_inference.py <xmodel_file>")
+        print("usage : python3 dpu_infer.py <xmodel_file>")
     else:
         main(sys.argv)
