@@ -44,13 +44,13 @@ def main(argv):
     config = importlib.import_module(params_path[:-3]).parameters
 
 
-    inputTensor = dpu_runners.get_input_tensors()
-    outputTensor = dpu_runners.get_output_tensors()
+    inputTensors = dpu_runners.get_input_tensors()
+    outputTensors = dpu_runners.get_output_tensors()
     
-    print("Input Tensor print: ", inputTensor)
-    print("Output Tensor print: ", outputTensor)
+    print("Input Tensor print: ", inputTensors)
+    print("Output Tensor print: ", outputTensors)
     
-    print(dir(inputTensors[0])
+    print(dir(inputTensors[0]))
     
     for inputTensor in inputTensors:
         print('Input tensor :',inputTensor.name, inputTensors.dims)
