@@ -4,11 +4,8 @@ import vart
 import time
 from typing import List
 from ctypes import *
-import random
-import pandas as pd
 import importlib
 import numpy as np
-import torch
 
 
 
@@ -19,51 +16,27 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     inputTensors = dpu_runner_tfBankNode.get_input_tensors()  #  get the model input tensor
     outputTensors = dpu_runner_tfBankNode.get_output_tensors() # get the model ouput tensor
     
-
-    outputHeight = outputTensors[0].dims[1]
-    outputWidth = outputTensors[0].dims[2]
-    outputChannel = outputTensors[0].dims[3]
+    input_ndim = tuple(inputTensors[0].dims)
+    output_ndim = tuple(outputTensors[0].dims)
     
-    outputSize = (outputHeight,outputWidth,outputChannel)
-    print("outputSize ", outputSize)
+    batchSize = input_ndim[0]
     
-
-    runSize = 1
-    shapeIn = (runSize,) + tuple([inputTensors[0].dims[i] for i in range(inputTensors[0].ndim)][1:])
-    print("What shapeIn", shapeIn) 
-    print("InputTensor[0]: ", inputTensors[0])
-
-    # InputTensor[0]: {name: 'ModelMain__input_0_fix', shape: [1, 416, 416, 3], type: 'xint8', attrs: {'location': 1, 'ddr_addr': 1264, 'bit_width': 8, 'round_mode': 'DPU_ROUND', 'reg_id': 2, 'fix_point': 4, 'if_signed': True}}
-
-    '''prepare batch input/output '''
+    
     outputData = []
+    outputData.append([np.empty(output_ndim, dtype=np.int8, order="C")])
+    
     inputData = []
-    outputData.append(np.empty((runSize,outputHeight,outputWidth,outputChannel), dtype = np.float32, order = 'C'))
-    inputData.append(np.empty((shapeIn), dtype = np.float32, order = 'C'))
-
-    '''init input image to input buffer '''
-    inputRun = inputData[0]
-    inputRun[0,...] = input.reshape(inputTensors[0].dims[1],inputTensors[0].dims[2],inputTensors[0].dims[3])
-
-
+    inputToRun = inputData[0]
+    inputToRun[0] = input.reshape(inputTensors[0].dims[1],inputTensors[0].dims[2],inputTensors[0].dims[3], inputTensors[0].dims[4])
+    
+    
     print("Execute async")
     job_id = dpu_runner_tfBankNode.execute_async(inputData,outputData)
-    dpu_runner_tfBankNode.wait(job_id)
+    dpu_runner_tfYolo.wait(job_id)
     print("Execcution completed..")
+    
 
-    print()
-    print("Shapes od output: ")
-    print(outputData[0].shape) # (1, 13, 13, 255)
-    print(outputData[1].shape) # (1, 26, 26, 255)
-    print(outputData[2].shape) # (1, 52, 52, 255)
-    print()
-    print("Input image shape: ", inputData[0].shape) # (1,416,416,3)
-    print("Image shape[0]: ", inputData[0][0].shape) # (416,416,3)
-
-    outputData[0] = np.transpose(outputData[0], (0,3,1,2))
-    outputData[1] = np.transpose(outputData[1], (0,3,1,2))
-    outputData[2] = np.transpose(outputData[2], (0,3,1,2))
-  
+    
     
 def get_child_subgraph_dpu(graph: "Graph") -> List["Subgraph"]:
     assert graph is not None, "'graph' should not be None."
@@ -101,12 +74,11 @@ def main(argv):
 
     # Preprocessing 
     
-    df_validationset_features = pd.read_csv(r"../dataset/df_validationset_features")
-    df_validationset_labels = pd.read_csv(r"../dataset/df_validationset_labels")
-    tensor_validationset_features = torch.tensor(df_validationset_features.values, dtype = torch.float)
-    tensor_validationset_labels = torch.tensor(df_validationset_labels.values, dtype = torch.float).view(-1,1)
+    df_validationset_features = np.loadtxt(r"../dataset/df_validationset_features",delimiter=',')
+    df_validationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
+
     
-    inputTen = tensor_validationset_features[0]
+    input = validationset_features[0]
     
     
     # Measure time 
@@ -114,7 +86,7 @@ def main(argv):
 
     """Assigns the runBankNode function with corresponding arguments"""
     print("runBankNode -- main function intialize")
-    runBankNode(dpu_runners, inputTen, config)
+    runBankNode(dpu_runners, input, config)
 
     del dpu_runners
     print("DPU runnerr deleted")
