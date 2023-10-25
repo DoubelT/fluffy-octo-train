@@ -13,8 +13,8 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     config = config
 
     print("inside the run BankNodes..")
-    inputTensors = dpu_runner_tfBankNode.get_input_tensors()  #  get the model i                                                                                                                                                             nput tensor
-    outputTensors = dpu_runner_tfBankNode.get_output_tensors() # get the model o                                                                                                                                                             uput tensor
+    inputTensors = dpu_runner_tfBankNode.get_input_tensors()  #  get the model input tensor
+    outputTensors = dpu_runner_tfBankNode.get_output_tensors() # get the model ouput tensor
 
     input_ndim = tuple(inputTensors[0].dims)
     output_ndim = tuple(outputTensors[0].dims)
@@ -25,9 +25,9 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     runSize = 1
     outputData = []
 
-    outputData.append([np.zeros((runSize, outputTensors[0].dims[1]), dtype=np.fl                                                                                                                                                             oat32, order="C")])
+    outputData.append([np.zeros((runSize, outputTensors[0].dims[1]), dtype=np.float32, order="C")])
 
-    shapeIn = (runSize,) + tuple([inputTensors[0].dims[i] for i in range(inputTe                                                                                                                                                             nsors[0].ndim)][1:])
+    shapeIn = (runSize,) + tuple([inputTensors[0].dims[i] for i in range(inputTensors[0].ndim)][1:])
     print('Coded shapeIn: ', shapeIn)
 
     print('Input Tensor[0]: ', inputTensors[0])
@@ -61,18 +61,18 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
 def get_child_subgraph_dpu(graph: "Graph") -> List["Subgraph"]:
     assert graph is not None, "'graph' should not be None."
 
-    root_subgraph = graph.get_root_subgraph() # Retrieves the root subgraph of t                                                                                                                                                             he input 'graph'
+    root_subgraph = graph.get_root_subgraph() # Retrieves the root subgraph of the input 'graph'
     assert (root_subgraph
             is not None), "Failed to get root subgraph of input Graph object."
 
     if root_subgraph.is_leaf:
-        return [] # If it is a leaf, it means there are no child subgraphs, so t                                                                                                                                                             he function returns an empty list
+        return [] # If it is a leaf, it means there are no child subgraphs, so the function returns an empty list
 
-    child_subgraphs = root_subgraph.toposort_child_subgraph() # Retrieves a list                                                                                                                                                              of child subgraphs of the 'root_subgraph' in topological order
+    child_subgraphs = root_subgraph.toposort_child_subgraph() # Retrieves a listof child subgraphs of the 'root_subgraph' in topological order
     assert child_subgraphs is not None and len(child_subgraphs) > 0
 
     return [
-        # List comprehension that filters the child_subgraphs list to include on                                                                                                                                                             ly those subgraphs that represent DPUs
+        # List comprehension that filters the child_subgraphs list to include only those subgraphs that represent DPUs
         cs for cs in child_subgraphs
         if cs.has_attr("device") and cs.get_attr("device").upper() == "DPU"
     ]
@@ -94,8 +94,8 @@ def main(argv):
 
     # Preprocessing
 
-    validationset_features = np.loadtxt(r"../dataset/df_validationset_features",                                                                                                                                                             delimiter=',')
-    alidationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", deli                                                                                                                                                             miter=',')
+    validationset_features = np.loadtxt(r"../dataset/df_validationset_features",delimiter=',')
+    alidationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
 
     print(validationset_features[0])
 
