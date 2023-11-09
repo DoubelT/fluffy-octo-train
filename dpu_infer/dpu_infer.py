@@ -37,14 +37,14 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     inputData.append(input)
 
 
-    print('INPUT TENSOR DIMS ', inputTensors[0].dims)
+    #print('INPUT TENSOR DIMS ', inputTensors[0].dims)
 
     #inputToRun = inputData[0]
 
     #inputToRun[0] = input.reshape(shapeIn)
 
     #print('!!!!!!!!!!!!!!!!!!!')
-    print('Input contains: ', inputData)
+    #print('Input contains: ', inputData)
     #print('!!!!!!!!!!!!!!!!!!!')
 
 
@@ -52,7 +52,9 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     testOutput = []
     testOutput.append(np.array([4],dtype=np.float32, order="C"))
     testInput = []
-    testInput.append(np.array([0.37731794,0.025352327,-1.0535597,0.50862247], dtype=np.float32,order="C"))
+    testInput.append(np.array([1.6653357,1.0844043,-1.098024,-0.18494527], dtype=np.float32,order="C"))
+    print("Test Input is: ", testInput)
+    print("Test Output is: ", testOutput)
     print("Execute async")
     job_id = dpu_runner_tfBankNode.execute_async(testInput, testOutput) #input output missing !!!
     dpu_runner_tfBankNode.wait(job_id)
