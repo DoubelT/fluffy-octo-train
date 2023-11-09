@@ -30,7 +30,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     shapeIn = (runSize,) + tuple([inputTensors[0].dims[i] for i in range(inputTensors[0].ndim)][1:])
     print('Coded shapeIn: ', shapeIn)
 
-    print('Input Tensor[0]: ', inputTensors[0])
+    #print('Input Tensor[0]: ', inputTensors[0])
 
 
     inputData = []
