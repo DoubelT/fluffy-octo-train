@@ -334,12 +334,16 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     
     testInput.append(prepped_array[0])
     
+    result_array = np.zeros(prep_array.len(), dtype=float32)
     
     print("Test Input is: ", testInput)
     print("Test Output is: ", testOutput)
     print("Execute async")
-    job_id = dpu_runner_tfBankNode.execute_async(testInput, testOutput) #input output missing !!!
-    dpu_runner_tfBankNode.wait(job_id)
+    for i in prep_array:
+        job_id = dpu_runner_tfBankNode.execute_async(prep_array[i], result_array[i]) 
+        dpu_runner_tfBankNode.wait(job_id)
+            
+    
     print("Execcution completed..")
     
     sigmoidOutput = sigmoid_rounded(testOutput[0])
