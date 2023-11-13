@@ -368,7 +368,7 @@ def prep_data(arrayToChange):
 def postprocess(array):    
     for i in range(array.shape[0]):
         array[i] = sigmoid_rounded(array[i])
-
+    return array
 
 
 def get_child_subgraph_dpu(graph: "Graph") -> List["Subgraph"]:
