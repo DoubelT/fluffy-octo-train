@@ -346,7 +346,6 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     
     print("Execcution completed..")
     print(len(result_array))
-    print(result_array.shape[0])
     print(postprocess(result_array))
    
 
@@ -365,7 +364,7 @@ def prep_data(arrayToChange):
     
 def postprocess(array):    
     post_array = []
-    for i in array.shape:
+    for i in range(len(array)):
         post_array.append(sigmoid_rounded(array[i][0][0]))
     return array
 
