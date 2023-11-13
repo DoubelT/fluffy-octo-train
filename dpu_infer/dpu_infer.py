@@ -330,7 +330,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     
     ##Feeding inputs to dpu
     
-    prep_data()
+    #prep_data()
     
     
     print("Test Input is: ", testInput)
