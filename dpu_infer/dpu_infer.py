@@ -334,7 +334,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     
     testInput.append(prepped_array[0])
     
-    result_array = np.zeros(prepped_array.size, dtype=float32)
+    result_array = np.zeros(prepped_array.size, dtype=np.float32)
     
     print("Test Input is: ", testInput)
     print("Test Output is: ", testOutput)
