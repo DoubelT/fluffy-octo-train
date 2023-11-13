@@ -348,9 +348,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     print(len(result_array))
     
     
-    
-    print("OUTPUT after running in Output: ",testOutput )
-    print("OUTPUT after applying sigmoid_rounded: ",sigmoidOutput )
+   
 
 
 
