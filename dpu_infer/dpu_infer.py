@@ -340,7 +340,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     print("Test Input is: ", testInput)
     print("Test Output is: ", testOutput)
     print("Execute async")
-    for i in range(prepped_array.shape[0}]):
+    for i in range(prepped_array.shape[0]):
         dataInput = [prepped_array[i]]
         dataOutput = [np.empty([1], dtype=np.float32)]
         job_id = dpu_runner_tfBankNode.execute_async(dataInput, dataOutput) 
