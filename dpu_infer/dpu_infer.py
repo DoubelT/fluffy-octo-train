@@ -336,7 +336,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     print("Test Input is: ", testInput)
     print("Test Output is: ", testOutput)
     print("Execute async")
-    job_id = dpu_runner_tfBankNode.execute_async(testInput, testOutput) #input output missing !!!
+    job_id = dpu_runner_tfBankNode.execute_async(inputData, testOutput) #input output missing !!!
     dpu_runner_tfBankNode.wait(job_id)
     print("Execcution completed..")
     
