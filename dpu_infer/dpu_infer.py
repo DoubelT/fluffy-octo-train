@@ -355,8 +355,6 @@ def sigmoid_rounded(x):
     
     
     
-def next_Input:
-        
 
 
 
