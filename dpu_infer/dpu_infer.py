@@ -49,16 +49,19 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     dpu_runner_tfBankNode.wait(job_id)
     print("Execcution completed..")
     
-    sigmoidOutput = sigmoid(testOutput[0])
+    sigmoidOutput = sigmoid_rounded(testOutput[0])
     
     print("OUTPUT after running in Output: ",testOutput )
-    print("OUTPUT after applying sigmoid: ",sigmoidOutput )
+    print("OUTPUT after applying sigmoid_rounded: ",sigmoidOutput )
 
 
 
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
+    
+def sigmoid_rounded(x):
+    return np.round(sigmoid(x))    
 
 
 
