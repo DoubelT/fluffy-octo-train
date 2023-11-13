@@ -6,8 +6,7 @@ from typing import List
 from ctypes import *
 import importlib
 import numpy as np
-import torch
-import torch.nn as nn
+
 
 
 
@@ -50,7 +49,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     dpu_runner_tfBankNode.wait(job_id)
     print("Execcution completed..")
     
-    sigmoidOutput = nn.Sigmoid(testOutput[0])
+    sigmoidOutput = sigmoid(testOutput[0])
     
     print("OUTPUT after running in Output: ",testOutput )
     print("OUTPUT after applying sigmoid: ",sigmoidOutput )
@@ -58,6 +57,8 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
 
 
 
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
 
 
