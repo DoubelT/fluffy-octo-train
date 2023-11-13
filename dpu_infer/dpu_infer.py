@@ -345,8 +345,8 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
         dataOutput = [np.empty([1], dtype=np.float32)]
         job_id = dpu_runner_tfBankNode.execute_async(dataInput, dataOutput) 
         dpu_runner_tfBankNode.wait(job_id)
-        result_array[i] = dataOutput
-            
+        #result_array[i] = dataOutput
+        print(dataOutput)        
     
     print("Execcution completed..")
     
