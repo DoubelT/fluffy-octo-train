@@ -354,7 +354,7 @@ def sigmoid(x):
 def sigmoid_rounded(x):
     return np.round(sigmoid(x))    
     
-def prep_data:
+def prep_data():
     file_path = r"../dataset/df_validationset_features"
 
     # Load data from the text file into a NumPy array
