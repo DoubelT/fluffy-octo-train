@@ -345,7 +345,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
         result_array.append(dataOutput)        
     
     print("Execcution completed..")
-    print(result_array.shape)
+    print(result_array.size)
     
     
     
