@@ -329,7 +329,8 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     #testInput.append(np.array([-0.6005844,-0.7122524,0.70745796,0.7955938], dtype=np.float32,order="C"))
     
     ##Feeding inputs to dpu
-    testInput.append(nested_input[0])
+    
+    prep_data()
     
     
     print("Test Input is: ", testInput)
@@ -353,7 +354,13 @@ def sigmoid(x):
 def sigmoid_rounded(x):
     return np.round(sigmoid(x))    
     
-    
+def prep_data:
+    file_path = r"../dataset/df_validationset_features"
+
+    # Load data from the text file into a NumPy array
+    data = np.loadtxt(file_path, dtype=np.float32)
+    print(data)
+    return
     
 
 
