@@ -6,6 +6,8 @@ from typing import List
 from ctypes import *
 import importlib
 import numpy as np
+import torch
+import torch.nn as nn
 
 
 
@@ -37,18 +39,6 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     inputData.append(input)
 
 
-    #print('INPUT TENSOR DIMS ', inputTensors[0].dims)
-
-    #inputToRun = inputData[0]
-
-    #inputToRun[0] = input.reshape(shapeIn)
-
-    #print('!!!!!!!!!!!!!!!!!!!')
-    #print('Input contains: ', inputData)
-    #print('!!!!!!!!!!!!!!!!!!!')
-
-
-
     testOutput = []
     testOutput.append(np.array([4],dtype=np.float32, order="C"))
     testInput = []
@@ -59,7 +49,11 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     job_id = dpu_runner_tfBankNode.execute_async(testInput, testOutput) #input output missing !!!
     dpu_runner_tfBankNode.wait(job_id)
     print("Execcution completed..")
-    print("OUTPUT after running: ",testOutput )
+    
+    sigmoidOutput = nn.Sigmoid(testOutput[0])
+    
+    print("OUTPUT after running in Output: ",testOutput )
+    print("OUTPUT after applying sigmoid: ",sigmoidOutput )
 
 
 
@@ -104,7 +98,7 @@ def main(argv):
     # Preprocessing
 
     validationset_features = np.loadtxt(r"../dataset/df_validationset_features",delimiter=',')
-    alidationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
+    validationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
 
     print(validationset_features[0])
 
