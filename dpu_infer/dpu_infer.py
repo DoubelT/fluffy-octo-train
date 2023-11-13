@@ -41,7 +41,13 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     testOutput = []
     testOutput.append(np.array([4],dtype=np.float32, order="C"))
     testInput = []
-    testInput.append(np.array([1.6653357,1.0844043,-1.098024,-0.18494527], dtype=np.float32,order="C"))
+    
+    #Sample which is a fake so output should be 0
+    #testInput.append(np.array([1.6653357,1.0844043,-1.098024,-0.18494527], dtype=np.float32,order="C"))
+    
+    #Sample which is a orginal so output should be 1
+    testInput.append(np.array([-0.6005844,-0.7122524,0.70745796,0.7955938], dtype=np.float32,order="C"))
+    
     print("Test Input is: ", testInput)
     print("Test Output is: ", testOutput)
     print("Execute async")
