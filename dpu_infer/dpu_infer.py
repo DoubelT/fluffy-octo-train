@@ -366,7 +366,7 @@ def prep_data(arrayToChange):
 def postprocess(array):    
     post_array = []
     for element in array:
-        post_array.append(sigmoid_rounded(array[element]))
+        post_array.append(sigmoid_rounded(element))
     return array
 
 
