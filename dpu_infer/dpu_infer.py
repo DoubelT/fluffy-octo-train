@@ -334,7 +334,7 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     
     testInput.append(prepped_array[0])
     
-    result_array = np.empty(prepped_array.shape[0], dtype=np.float32)
+    result_array = []
 
     
     print("Test Input is: ", testInput)
@@ -346,9 +346,10 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
         job_id = dpu_runner_tfBankNode.execute_async(dataInput, dataOutput) 
         dpu_runner_tfBankNode.wait(job_id)
         #result_array[i] = dataOutput
-        print(dataOutput)        
+        result_array.append(dataOutput)        
     
     print("Execcution completed..")
+    print(result_array)
     
     sigmoidOutput = sigmoid_rounded(testOutput[0])
     
