@@ -23,7 +23,7 @@ class BankNodes(nn.Module):
         return self.network(x)
 
 if __name__ == "__main__":
-    config = {"input_size": 4, "hiddenlayer_size": 8, "outputlayer_size": 1}  # Adjust these values as needed
+    config = {"input_size": 4, "hiddenlayer_size": 16, "outputlayer_size": 1}  # Adjust these values as needed
     m = BankNodes(config)
     x = torch.randn(1, config["input_size"])
     y = m(x)

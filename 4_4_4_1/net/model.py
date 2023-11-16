@@ -10,10 +10,12 @@ class BankNodes(nn.Module):
 
         # Define the layers using OrderedDict
         layers = OrderedDict()
-        layers['fc1'] = nn.Linear(in_features=config["input_size"], out_features=config["hiddenlayer_size"])
+        layers['fc1'] = nn.Linear(in_features=config["input_size"], out_features=config["hiddenlayer_size1"])
         layers['relu1'] = nn.ReLU()
-        layers['fc2'] = nn.Linear(in_features=config["hiddenlayer_size"], out_features=config["outputlayer_size"])
-        layers['sig2'] = nn.Sigmoid()
+        layers['fc2'] = nn.Linear(in_features=config["hiddenlayer_size1"], out_features=config["hiddenlayer_size2"])
+        layers['relu2'] = nn.ReLU()
+        layers['fc3'] = nn.Linear(in_features=config["hiddenlayer_size2"], out_features=config["outputlayer_size"])
+        layers['sig3'] = nn.Sigmoid()
 
         # Create the neural network using the layers
         self.network = nn.Sequential(layers)
@@ -23,7 +25,7 @@ class BankNodes(nn.Module):
         return self.network(x)
 
 if __name__ == "__main__":
-    config = {"input_size": 4, "hiddenlayer_size": 8, "outputlayer_size": 1}  # Adjust these values as needed
+    config = {"input_size": 4, "hiddenlayer_size1": 4, "hiddenlayer_size2": 4, "outputlayer_size": 1} # Adjust these values as needed
     m = BankNodes(config)
     x = torch.randn(1, config["input_size"])
     y = m(x)

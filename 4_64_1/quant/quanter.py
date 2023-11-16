@@ -103,7 +103,7 @@ def quantization(title='optimize',
 if __name__ == '__main__':
 
   model_name = 'Banknodes'
-  file_path = '../weights/pretrained_banknode481.pth'
+  file_path = '../weights/pretrained_banknode4641.pth'
 
   feature_test = ' float model evaluation'
   if args.quant_mode != 'float':

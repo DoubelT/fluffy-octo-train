@@ -7,5 +7,5 @@ parameters = {
     "csv_path": "../test/csv/",
     "classes_names_path": "../data/coco.names",
     "parallels": [0],
-    "pretrain_snapshot": "../weights/pretrained_banknode481.pth"
+    "pretrain_snapshot": "../weights/pretrained_banknode432321.pth"
 }
