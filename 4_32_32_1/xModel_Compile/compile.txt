@@ -1,1 +1,1 @@
-vai_c_xir --xmodel ./quant/quantize_result/BankNodes_int.xmodel --arch /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json --net_name BankNodes --output_dir ./Compiled_Banknodes
+vai_c_xir --xmodel ./quant/quantize_result/BankNodes_int.xmodel --arch /opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json --net_name Banknodes --output_dir ./Compiled_Bankenodes432321

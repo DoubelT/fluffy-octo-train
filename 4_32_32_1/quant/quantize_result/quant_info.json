@@ -1,16 +1,19 @@
 {
   "param":
   {
-    "BankNodes::network.fc1.weight":[[8,6]],
+    "BankNodes::network.fc1.weight":[[8,7]],
     "BankNodes::network.fc1.bias":[[8,7]],
-    "BankNodes::network.fc2.weight":[[8,6]],
-    "BankNodes::network.fc2.bias":[[8,8]]
+    "BankNodes::network.fc2.weight":[[8,8]],
+    "BankNodes::network.fc2.bias":[[8,8]],
+    "BankNodes::network.fc3.weight":[[8,8]],
+    "BankNodes::network.fc3.bias":[[8,11]]
   },
   "output":
   {
-    "BankNodes::input_0":[[8,6]],
-    "BankNodes::BankNodes/Sequential[network]/ReLU[relu1]/34":[[8,5]],
-    "BankNodes::BankNodes/Sequential[network]/Linear[fc2]/35":[[8,4]]
+    "BankNodes::input_0":[[8,7]],
+    "BankNodes::BankNodes/Sequential[network]/ReLU[relu1]/48":[[8,7]],
+    "BankNodes::BankNodes/Sequential[network]/ReLU[relu2]/50":[[8,7]],
+    "BankNodes::BankNodes/Sequential[network]/Linear[fc3]/51":[[8,11]]
   },
   "input":
   {

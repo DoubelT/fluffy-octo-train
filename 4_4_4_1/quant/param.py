@@ -1,6 +1,7 @@
 parameters = {
     "input_size": 4,
-    "hiddenlayer_size": 8,
+    "hiddenlayer_size1": 4,
+    "hiddenlayer_size2": 4,
     "outputlayer_size": 1,
     "batch_size": 16,
     "confidence_threshold": 0.5,

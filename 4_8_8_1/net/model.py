@@ -9,6 +9,7 @@ class BankNodes(nn.Module):
         self.training = is_training
 
         # Define the layers using OrderedDict
+        layers = OrderedDict()
         layers['fc1'] = nn.Linear(in_features=config["input_size"], out_features=config["hiddenlayer_size1"])
         layers['relu1'] = nn.ReLU()
         layers['fc2'] = nn.Linear(in_features=config["hiddenlayer_size1"], out_features=config["hiddenlayer_size2"])
