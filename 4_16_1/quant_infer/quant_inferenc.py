@@ -40,8 +40,9 @@ with torch.no_grad():
     print("Expect:", tensor_validationset_labels)
     eq_tensor = torch.eq(outputs, outputs)
     print(eq_tensor)
-    count_false = (eq_tensor == False).sum().item()
-    print("Wrong predictions: ",count_false)
+    count_true = (eq_tensor == True).sum().item()
+    print("True predictions: ",count_true)
+    print("Accuracy: ", (count_true/eq_tensor.size()[0]))
 
 print("#####DONE#####")
 
