@@ -27,8 +27,12 @@ df_validationset_features = pd.read_csv(r"../dataset/df_validationset_features")
 df_validationset_labels = pd.read_csv(r"../dataset/df_validationset_labels")
 tensor_validationset_features = torch.tensor(df_validationset_features.values, dtype = torch.float)
 tensor_validationset_labels = torch.tensor(df_validationset_labels.values, dtype = torch.float).view(-1,1)
-#print(tensor_validationset_features)
-#print(tensor_validationset_labels)
+print("Validatenset Features:")
+print(tensor_validationset_features)
+print("ValSet features print done")
+print("Validationset_labels:")
+print(tensor_validationset_labels)
+print("ValSet Labels print done")
 
 
 ####### Inference
@@ -39,9 +43,13 @@ with torch.no_grad():
     print("Output:", outputs)
     print("Expect:", tensor_validationset_labels)
     eq_tensor = torch.eq(outputs, outputs)
-    print(eq_tensor)
-    count_false = (eq_tensor == False).sum().item()
-    print("Wrong predictions: ",count_false)
+    print("Evaluation set was this size", eq_tensor.size())
+    eq_tensor_size = eq_tensor.size()
+    count_trues = (eq_tensor == True).sum().item()
+    print("Right predictions: ",count_trues)
+    
+    print("Accuracy is: ", (count_trues/eq_tensor_size[0])*100)
+
 
 print("#####DONE#####")
 
