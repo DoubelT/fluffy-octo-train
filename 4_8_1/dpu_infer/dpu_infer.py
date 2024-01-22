@@ -290,7 +290,7 @@ data = [
 nested_input = np.array(data)
 
 
-def runBankNode(dpu_runner_tfBankNode, input, expected_output, config):
+def runBankNode(dpu_runner_tfBankNode, expected_output, config):
     config = config
 
     print("inside the run BankNodes..")
@@ -311,28 +311,9 @@ def runBankNode(dpu_runner_tfBankNode, input, expected_output, config):
     shapeIn = (runSize,) + tuple([inputTensors[0].dims[i] for i in range(inputTensors[0].ndim)][1:])
     print('Coded shapeIn: ', shapeIn)
 
-    #print('Input Tensor[0]: ', inputTensors[0])
-
-
-    inputData = []
-    inputData.append(input)
-
-
-    testOutput = []
-    testOutput.append(np.array([4],dtype=np.float32, order="C"))
-    testInput = []
-    
-    #Sample which is a fake so output should be 0
-    #testInput.append(np.array([1.6653357,1.0844043,-1.098024,-0.18494527], dtype=np.float32,order="C"))
-    
-    #Sample which is a orginal so output should be 1
-    #testInput.append(np.array([-0.6005844,-0.7122524,0.70745796,0.7955938], dtype=np.float32,order="C"))
-    
     ##Feeding inputs to dpu
     
     prepped_array = prep_data(nested_input)
-    
-    testInput.append(prepped_array[0])
     
     result_array = []
 
@@ -428,23 +409,19 @@ def main(argv):
 
     # Preprocessing
 
-    validationset_features = np.loadtxt(r"../dataset/df_validationset_features",delimiter=',')
     validationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
-
-    #print(validationset_features[0])
 
     input = validationset_features[0]
     
     print("First Valset Label: ",validationset_labels[0])
     print("Valset Label length: ",  len(validationset_labels))
 
-
     # Measure time
     time_start = time.time()
 
     """Assigns the runBankNode function with corresponding arguments"""
     print("runBankNode -- main function intialize")
-    runBankNode(dpu_runners, input, validationset_labels, config)
+    runBankNode(dpu_runners, validationset_labels, config)
 
     del dpu_runners
     print("DPU runnerr deleted")
