@@ -412,7 +412,7 @@ def main(argv):
 
     #print(validationset_features[0])
 
-    #input = validationset_features[0]
+    input = validationset_features[0]
     
     print("First Valset Label: ",validationset_labels[0])
 
@@ -422,7 +422,7 @@ def main(argv):
 
     """Assigns the runBankNode function with corresponding arguments"""
     print("runBankNode -- main function intialize")
-    runBankNode(dpu_runners, input, expected_output, config)
+    runBankNode(dpu_runners, input, validationset_labels, config)
 
     del dpu_runners
     print("DPU runnerr deleted")
