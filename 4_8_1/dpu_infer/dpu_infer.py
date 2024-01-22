@@ -349,9 +349,25 @@ def runBankNode(dpu_runner_tfBankNode, input, expected_output, config):
     print(postprocess(result_array))
     
     print("Expected Output Array :", expected_output)
+    compare_result(result_array, expected_output)
    
 
-
+def compare_result(inference_result, expected_result):
+    if(len(inference_result) != len(expected_result):
+        return "Somethings wrong with the Output lenghts"
+    
+    bool_result_arr = []
+    trues = 0
+    for i in range(len(inference_result)):
+        if(inference_result[i] == expected_result[i]):
+            bool_result_arr[i] = True
+            trues += 1
+        else:
+            bool_result_arr[i] = False
+    
+    print("Comparison of the Results succeded") 
+    print("Accuracy : ", trues/len(inference_result) )    
+            
 
 
 def sigmoid(x):
