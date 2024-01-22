@@ -358,18 +358,20 @@ def compare_result(inference_result, expected_result):
     print(type(inference_result))
     print(type(expected_result))
     
+    nmpy_inferenceresult = np.array(inference_result)
+    print(nmpy_inferenceresult)
     if(len(inference_result) != len(expected_result)):
         return "Somethings wrong with the Output lenghts"
     
     
     trues = 0
-    for i in range(len(inference_result)):
-        if(inference_result[i] == expected_result[i]):
+    for i in range(len(nmpy_inferenceresult)):
+        if(nmpy_inferenceresult[i] == expected_result[i]):
             trues += 1
     
     print("Trues: ", trues)    
     print("Comparison of the Results succeded") 
-    print("Accuracy : ", trues/len(inference_result) )    
+    print("Accuracy : ", trues/len(nmpy_inferenceresult) )    
             
 
 
