@@ -290,7 +290,7 @@ data = [
 nested_input = np.array(data)
 
 
-def runBankNode(dpu_runner_tfBankNode, input, config):
+def runBankNode(dpu_runner_tfBankNode, input, expected_output, config):
     config = config
 
     print("inside the run BankNodes..")
@@ -347,6 +347,8 @@ def runBankNode(dpu_runner_tfBankNode, input, config):
     print("Execcution completed..")
     print(len(result_array))
     print(postprocess(result_array))
+    
+    print("Expected Output Array :", expected_output)
    
 
 
@@ -408,9 +410,11 @@ def main(argv):
     validationset_features = np.loadtxt(r"../dataset/df_validationset_features",delimiter=',')
     validationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
 
-    print(validationset_features[0])
+    #print(validationset_features[0])
 
-    input = validationset_features[0]
+    #input = validationset_features[0]
+    
+    print("First Valset Label: ",validationset_labels[0])
 
 
     # Measure time
@@ -418,7 +422,7 @@ def main(argv):
 
     """Assigns the runBankNode function with corresponding arguments"""
     print("runBankNode -- main function intialize")
-    runBankNode(dpu_runners, input, config)
+    runBankNode(dpu_runners, input, expected_output, config)
 
     del dpu_runners
     print("DPU runnerr deleted")
