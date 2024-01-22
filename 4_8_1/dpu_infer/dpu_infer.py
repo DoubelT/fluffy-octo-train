@@ -411,7 +411,7 @@ def main(argv):
 
     validationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
  
-        print("First Valset Label: ",validationset_labels[0])
+    print("First Valset Label: ",validationset_labels[0])
     print("Valset Label length: ",  len(validationset_labels))
 
     # Measure time
