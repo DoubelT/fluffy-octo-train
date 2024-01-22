@@ -346,13 +346,15 @@ def runBankNode(dpu_runner_tfBankNode, input, expected_output, config):
     
     print("Execcution completed..")
     print(len(result_array))
-    print(postprocess(result_array))
+    postprocesse_array = postprocess(result_array)
+    print(postprocesse_array)
     
     print("Expected Output Array :", expected_output)
     compare_result(result_array, expected_output)
    
 
 def compare_result(inference_result, expected_result):
+    
     if(len(inference_result) != len(expected_result)):
         return "Somethings wrong with the Output lenghts"
     
