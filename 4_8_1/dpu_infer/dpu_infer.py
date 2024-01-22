@@ -350,7 +350,7 @@ def runBankNode(dpu_runner_tfBankNode, input, expected_output, config):
     print(postprocesse_array)
     
     print("Expected Output Array :", expected_output)
-    compare_result(result_array, expected_output)
+    compare_result(postprocesse_array, expected_output)
    
 
 def compare_result(inference_result, expected_result):
