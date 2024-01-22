@@ -290,28 +290,32 @@ data = [
 nested_input = np.array(data)
 
 
-def runBankNode(dpu_runner_tfBankNode):
-    
+def runBankNode(dpu_runner_tfBankNode, expected_output, config):
+    config = config
+
     print("inside the run BankNodes..")
     inputTensors = dpu_runner_tfBankNode.get_input_tensors()  #  get the model input tensor
     outputTensors = dpu_runner_tfBankNode.get_output_tensors() # get the model ouput tensor
 
-    #Grab input Dimensions
     input_ndim = tuple(inputTensors[0].dims)
     output_ndim = tuple(outputTensors[0].dims)
 
-    #Print input and output Tensors
     print(inputTensors[0])
     print(outputTensors[0])
-   
-    #Preapare input data
+
+    runSize = 1
+    outputData = []
+
+    outputData.append([np.zeros((runSize, outputTensors[0].dims[1]), dtype=np.float32, order="C")])
+
+    shapeIn = (runSize,) + tuple([inputTensors[0].dims[i] for i in range(inputTensors[0].ndim)][1:])
+    print('Coded shapeIn: ', shapeIn)
+
+    ##Feeding inputs to dpu
+    
     prepped_array = prep_data(nested_input)
     
-    #Create result array
     result_array = []
-    
-    #Start Timer
-    time_start = time.time()
 
     print("Execute async")
     for i in range(prepped_array.shape[0]):
@@ -321,21 +325,35 @@ def runBankNode(dpu_runner_tfBankNode):
         dpu_runner_tfBankNode.wait(job_id)
         result_array.append(dataOutput)        
     
-    #Stop time for performance mesaurement
-    time_end = time.time()
-    timetotal = time_end - time_start
-    total_frames = 1
-    fps = float(total_frames / timetotal)
-    print(
-        "FPS=%.2f, total frames = %.2f , time=%.6f seconds"
-        % (fps, total_frames, timetotal)
-    )
-    #Finished executen starting postprocessing of data
     print("Execcution completed..")
-    print(postprocess(result_array))
+    print(len(result_array))
+    postprocesse_array = postprocess(result_array)
+    print(postprocesse_array)
+    
+    print("Expected Output Array :", expected_output)
+    compare_result(postprocesse_array, expected_output)
    
 
-
+def compare_result(inference_result, expected_result):
+    
+    print(type(inference_result))
+    print(type(expected_result))
+    
+    nmpy_inferenceresult = np.array(inference_result)
+    print(nmpy_inferenceresult)
+    if(len(inference_result) != len(expected_result)):
+        return "Somethings wrong with the Output lenghts"
+    
+    
+    trues = 0
+    for i in range(len(nmpy_inferenceresult)):
+        if(nmpy_inferenceresult[i] == expected_result[i]):
+            trues += 1
+    
+    print("Trues: ", trues)    
+    print("Comparison of the Results succeded") 
+    print("Accuracy : ", trues/len(nmpy_inferenceresult) )    
+            
 
 
 def sigmoid(x):
@@ -391,18 +409,29 @@ def main(argv):
 
     # Preprocessing
 
+    validationset_labels = np.loadtxt(r"../dataset/df_validationset_labels", delimiter=',')
+ 
+    print("First Valset Label: ",validationset_labels[0])
+    print("Valset Label length: ",  len(validationset_labels))
 
     # Measure time
-    
+    time_start = time.time()
 
     """Assigns the runBankNode function with corresponding arguments"""
     print("runBankNode -- main function intialize")
-    runBankNode(dpu_runners, input, config)
+    runBankNode(dpu_runners, validationset_labels, config)
 
     del dpu_runners
     print("DPU runnerr deleted")
 
-    
+    time_end = time.time()
+    timetotal = time_end - time_start
+    total_frames = 1
+    fps = float(total_frames / timetotal)
+    print(
+        "FPS=%.2f, total frames = %.2f , time=%.6f seconds"
+        % (fps, total_frames, timetotal)
+    )
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
