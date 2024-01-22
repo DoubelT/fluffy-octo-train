@@ -1,0 +1,33 @@
+Infernzdate auf Laptop
+
+4-8-1: Accuracy: 0.8138686418533325
+4-8-8-1: Accuracy: 0.956204354763031 
+4-4-4-1: Accuracy: 0.8978102207183838
+4-16-1: Accuracy: 0.9379562139511108
+4-16-16-1: Accuracy: 0.985401451587677
+4-32-32-1: Accuracy: 0.985401451587677
+4-64-1: Accuracy: 0.9781022071838379
+4-64-64-1: Accuracy: 1.0
+
+
+Quant Accuracy
+
+4-8-1: Accuracy: 1.0
+4-8-8-1: Accuracy: 1.0
+4-4-4-1: Accuracy: 1.0
+4-16-1: Accuracy: 1.0
+4-16-16-1: Accuracy: 1.0
+4-32-32-1: Accuracy: 1.0
+4-64-1: Accuracy: 1.0
+4-64-64-1: Accuracy: 1.0
+
+DPU Accuracy:
+
+4-8-1: Accuracy: 0.9418181818181818
+4-8-8-1: Accuracy: 0.9818181818181818
+4-4-4-1: Accuracy: 0.88
+4-16-1: Accuracy: 0.9236363636363636
+4-16-16-1: Accuracy: 0.9527272727272728
+4-32-32-1: Accuracy: 0.5236363636363637 ???
+4-64-1: Accuracy: 0.9745454545454545
+4-64-64-1: Accuracy: 1.0
