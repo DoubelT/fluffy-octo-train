@@ -363,7 +363,8 @@ def compare_result(inference_result, expected_result):
     for i in range(len(inference_result)):
         if(inference_result[i] == expected_result[i]):
             trues += 1
-            
+    
+    print("Trues: ", trues)    
     print("Comparison of the Results succeded") 
     print("Accuracy : ", trues/len(inference_result) )    
             
