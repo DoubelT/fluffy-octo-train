@@ -42,7 +42,7 @@ with torch.no_grad():
     outputs = torch.round(model(tensor_validationset_features))
     print("Output:", outputs)
     print("Expect:", tensor_validationset_labels)
-    eq_tensor = torch.eq(outputs, outputs)
+    eq_tensor = torch.eq(outputs, tensor_validationset_labels)
     print("Evaluation set was this size", eq_tensor.size())
     eq_tensor_size = eq_tensor.size()
     count_trues = (eq_tensor == True).sum().item()
