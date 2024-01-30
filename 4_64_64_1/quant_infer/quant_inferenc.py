@@ -38,7 +38,7 @@ with torch.no_grad():
     outputs = torch.round(model(tensor_validationset_features))
     print("Output:", outputs)
     print("Expect:", tensor_validationset_labels)
-    eq_tensor = torch.eq(outputs, outputs)
+    eq_tensor = torch.eq(outputs, tensor_validationset_labels)
     print(eq_tensor)
     count_true = (eq_tensor == True).sum().item()
     print("True predictions: ",count_true)
