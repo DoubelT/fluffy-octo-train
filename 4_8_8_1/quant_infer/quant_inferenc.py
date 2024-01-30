@@ -43,7 +43,7 @@ with torch.no_grad():
     eq_tensor_size = eq_tensor.size()
     count_true = (eq_tensor == True).sum().item()
     print("True predictions: ",count_true)
-    print("Accuracy ", (count_true/eq_tensor_size[0])*100)
+    print("Accuracy ", (count_true/eq_tensor_size[0]))
 print("#####DONE#####")
 
    

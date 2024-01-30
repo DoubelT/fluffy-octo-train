@@ -48,7 +48,7 @@ with torch.no_grad():
     count_trues = (eq_tensor == True).sum().item()
     print("Right predictions: ",count_trues)
     
-    print("Accuracy is: ", (count_trues/eq_tensor_size[0])*100)
+    print("Accuracy is: ", (count_trues/eq_tensor_size[0]))
 
 
 print("#####DONE#####")

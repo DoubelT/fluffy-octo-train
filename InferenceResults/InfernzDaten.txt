@@ -12,13 +12,13 @@ Infernzdate auf Laptop
 
 Quant Accuracy
 
-4-8-1: Accuracy: 1.0
-4-8-8-1: Accuracy: 1.0
-4-4-4-1: Accuracy: 1.0
-4-16-1: Accuracy: 1.0
-4-16-16-1: Accuracy: 1.0
-4-32-32-1: Accuracy: 1.0
-4-64-1: Accuracy: 1.0
+4-8-1: Accuracy: 0.9781021897810219
+4-8-8-1: Accuracy: 0.9781021897810219
+4-4-4-1: Accuracy: 0.9197080291970803
+4-16-1: Accuracy: 0.9233576642335767
+4-16-16-1: Accuracy: 0.9854014598540146
+4-32-32-1: Accuracy: 0.9416058394160584
+4-64-1: Accuracy: 0.9708029197080292
 4-64-64-1: Accuracy: 1.0
 
 DPU Accuracy:
